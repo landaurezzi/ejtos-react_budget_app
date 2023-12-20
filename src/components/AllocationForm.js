@@ -2,7 +2,7 @@ import React, { useContext, useState } from 'react';
 import { AppContext } from '../context/AppContext';
 
 const AllocationForm = (props) => {
-    const { dispatch,remaining  } = useContext(AppContext);
+    const { dispatch,remaining, currency  } = useContext(AppContext);
 
     const [name, setName] = useState('');
     const [cost, setCost] = useState('');
@@ -24,6 +24,7 @@ const AllocationForm = (props) => {
             dispatch({
                 type: 'RED_EXPENSE',
                 payload: expense,
+                cost: 10,
             });
         } else {
                 dispatch({
@@ -35,6 +36,7 @@ const AllocationForm = (props) => {
 
     return (
         <div>
+            <h2>Change allocation</h2>
             <div className='row'>
 
             <div className="input-group mb-3" style={{ marginLeft: '2rem' }}>
@@ -51,6 +53,7 @@ const AllocationForm = (props) => {
                 <option value="Admin" name="admin">Admin</option>
                   </select>
 
+                
                     <div className="input-group-prepend" style={{ marginLeft: '2rem' }}>
                 <label className="input-group-text" htmlFor="inputGroupSelect02">Allocation</label>
                   </div>
@@ -58,16 +61,17 @@ const AllocationForm = (props) => {
                         <option defaultValue value="Add" name="Add">Add</option>
                 <option value="Reduce" name="Reduce">Reduce</option>
                   </select>
-
+                  <span style={{ marginLeft: '2rem', fontSize: '1.5rem' }}>{currency}</span>
                     <input
                         required='required'
                         type='number'
                         id='cost'
                         value={cost}
-                        style={{ marginLeft: '2rem' , size: 10}}
+                        style={{ marginLeft: '0.5rem' , fontSize: '1.5rem'}}
                         onChange={(event) => setCost(event.target.value)}>
                         </input>
 
+                    <span style={{ marginLeft: '0.5rem' }}></span>
                     <button className="btn btn-primary" onClick={submitEvent} style={{ marginLeft: '2rem' }}>
                         Save
                     </button>
